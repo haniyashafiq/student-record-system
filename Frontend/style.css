@@ -1,0 +1,17 @@
+.hero-section {
+  background: linear-gradient(to right, #004cff, #007bff);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gradientMove 6s ease infinite alternate;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
