@@ -1,0 +1,140 @@
+.hero-section {
+  background: linear-gradient(to right, #004cff, #007bff);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gradientMove 6s ease infinite alternate;
+}
+
+@keyframes gradientMove {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hover card lift effect */
+.hover-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 1rem;
+  border: 1px solid #e0e0e0;
+}
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 1s ease forwards;
+}
+
+/* Optional: Make sure hero-section text and container have smooth entrance */
+.hero-section {
+  background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);
+  padding: 5rem 0;
+  /* fallback colors or overlay if you want */
+}
+
+/* Button shadow on hover for better UX */
+.btn-warning.shadow:hover {
+  box-shadow: 0 6px 12px rgba(255, 193, 7, 0.6);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+/* Scoped styles for About page */
+.about-page .hero-section {
+  background: linear-gradient(135deg, #0052D4, #4364F7, #6FB1FC);
+  padding: 5rem 1rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease infinite alternate;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-page .animate-fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-page .animate-slide-up {
+  animation: slideUp 1.2s ease forwards;
+}
+
+.about-page .hover-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 1rem;
+  border: 1px solid #e0e0e0;
+  cursor: default;
+}
+
+.about-page .hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-page .btn-primary.shadow:hover {
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
