@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GoSchooler - Contact</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  
+  <style>
+    /* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in,
+.animate-slide-up {
+  animation-fill-mode: forwards;
+  will-change: opacity, transform;
+  /* Keep animation duration and easing */
+}
+.animate-fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+.animate-slide-up {
+  animation: slideUp 1.2s ease forwards;
+}
+
+/* Contact info hover effect */
+.contact-info li {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: default;
+  will-change: transform, box-shadow;
+}
+.contact-info li:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: #e9f0ff;
+}
+
+/* Button shadow on hover */
+button.btn-primary {
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+button.btn-primary:hover {
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Social icons */
+.social-icons a {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #007bff;
+  transition: color 0.3s ease;
+  will-change: color;
+}
+.social-icons a:hover {
+  color: #004cff;
+}
+
+/* Responsive iframe */
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.map-responsive iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  border-radius: 0.5rem;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4 shadow-sm">
+    <a class="navbar-brand fw-bold" href="index.html">GoSchooler</a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a 
+            class="nav-link dropdown-toggle" 
+            href="#" 
+            role="button" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false"
+          >
+            Features
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
+            <li><a class="dropdown-item" href="student.html">Students</a></li>
+            <li><a class="dropdown-item" href="classes_courses.html">Classes & Courses</a></li>
+            <li><a class="dropdown-item" href="evaluation.html">Evaluation</a></li>
+            <li><a class="dropdown-item" href="fees.html">Fees</a></li>
+            <li><a class="dropdown-item" href="attendance.html">Attendance</a></li>
+            <li><a class="dropdown-item" href="results.html">Results</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="container py-5 animate-fade-in">
+    <h1 class="mb-4 animate-slide-up animate-delay-1">Contact Us</h1>
+    <p class="lead mb-5 animate-slide-up animate-delay-1">
+      We would love to hear from you! Reach out using the information below or send us a message using the form.
+    </p>
+
+    <div class="row g-5">
+      <!-- Contact Info & Social -->
+      <div class="col-md-5 animate-slide-up animate-delay-2">
+        <h5>Contact Information</h5>
+        <ul class="list-unstyled contact-info mb-4">
+          <li><i class="bi bi-geo-alt-fill me-2"></i>123 School St, Education City</li>
+          <li><i class="bi bi-telephone-fill me-2"></i>+1 (555) 123-4567</li>
+          <li><i class="bi bi-envelope-fill me-2"></i>support@goschooler.com</li>
+        </ul>
+
+        <h6>Follow Us</h6>
+        <div class="social-icons mb-4" role="list">
+          <a href="#" aria-label="Facebook" role="listitem"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Twitter" role="listitem"><i class="bi bi-twitter"></i></a>
+          <a href="#" aria-label="Instagram" role="listitem"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" role="listitem"><i class="bi bi-linkedin"></i></a>
+        </div>
+
+        <div class="map-responsive" aria-label="GoSchooler Location Map">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0862207282717!2d-122.4194154846819!3d37.774929779759735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085818b2b3e98df%3A0x63b14bc08eeef46a!2s123%20School%20St%2C%20San%20Francisco%2C%20CA%2094103%2C%20USA!5e0!3m2!1sen!2s!4v1681007000000!5m2!1sen!2s" 
+            allowfullscreen 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade" 
+            title="GoSchooler Location">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-md-7 animate-slide-up animate-delay-3">
+        <form id="contactForm" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              class="form-control" 
+              placeholder="Your name" 
+              required 
+              minlength="2" 
+              aria-describedby="nameHelp"
+            />
+            <div class="invalid-feedback">
+              Please enter your name (at least 2 characters).
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="form-control" 
+              placeholder="your.email@example.com" 
+              required 
+              aria-describedby="emailHelp"
+            />
+            <div class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea 
+              id="message" 
+              rows="5" 
+              class="form-control" 
+              placeholder="Your message here..." 
+              required 
+              minlength="10"
+            ></textarea>
+            <div class="invalid-feedback">
+              Please enter a message (at least 10 characters).
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary shadow">Send Message</button>
+          <div id="formMessage" class="mt-3" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-white py-4 bg-primary mt-5">
+    <p class="mb-0">© 2025 GoSchooler. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    (() => {
+      const form = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        formMessage.textContent = '';
+        formMessage.className = '';
+
+        // Check HTML5 validation
+        if (!form.checkValidity()) {
+          e.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        formMessage.className = 'alert alert-info';
+        formMessage.textContent = 'Sending your message...';
+
+        setTimeout(() => {
+          formMessage.className = 'alert alert-success';
+          formMessage.textContent = 'Thank you for contacting us! We will get back to you shortly.';
+          form.reset();
+          form.classList.remove('was-validated');
+        }, 1500);
+      });
+    })();
+  </script>
+
+</body>
+</html>

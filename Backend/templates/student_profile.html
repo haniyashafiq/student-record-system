@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Profile | GoSchooler</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    nav.navbar {
+      background: #0d6efd;
+    }
+    nav.navbar .nav-link {
+      color: #fff;
+    }
+    nav.navbar .nav-link.active,
+    nav.navbar .nav-link:hover {
+      color: #ffc107;
+    }
+    .profile-header {
+      background: linear-gradient(90deg, #0d6efd 0%, #0056b3 100%);
+      color: white;
+      padding: 7rem 2rem 2rem;
+      border-radius: 0 0 15px 15px;
+      text-align: center;
+      position: relative;
+    }
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: white;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .section-title {
+      border-bottom: 2px solid #0d6efd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #0d6efd;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #333;
+    }
+    .card {
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.07);
+      border-radius: 12px;
+    }
+    .btn-primary {
+      background: #0d6efd;
+      border: none;
+      min-width: 120px;
+    }
+    .btn-primary:hover {
+      background: #0b5ed7;
+    }
+    .table thead {
+      background: #0d6efd;
+      color: white;
+    }
+    .table-hover tbody tr:hover {
+      background-color: #e9f4ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark px-4 shadow-sm">
+    <a class="navbar-brand" href="#">GoSchooler</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('student.student_page') }}">Students</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Profile Header -->
+<!-- ... same <head> section as before ... -->
+
+<header class="profile-header mb-5">
+  <img src="https://i.pravatar.cc/150?u={{ student.student_ID }}" alt="Student Photo" class="profile-photo" />
+  <h1 class="mt-5 pt-3">{{ student.first_name }} {{ student.last_name }}</h1>
+  <p class="lead">Student ID: {{ student.student_ID }}</p>
+</header>
+
+<main class="container mb-5">
+
+  <!-- Personal Info -->
+  <section class="card p-4 mb-4">
+    <h2 class="section-title">Personal Information</h2>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <p><span class="info-label">First Name:</span> {{ student.first_name }}</p>
+        <p><span class="info-label">Last Name:</span> {{ student.last_name }}</p>
+        <p><span class="info-label">Gender:</span> {{ student.gender }}</p>
+        <p><span class="info-label">Date of Birth:</span> {{ student.date_of_birth.strftime('%Y-%m-%d') }}</p>
+      </div>
+      <div class="col-md-6 mb-3">
+        <p><span class="info-label">Class:</span> {{ student.class_rel.class_name }}</p>
+        <p><span class="info-label">Academic Year:</span> {{ academic_year.year_name }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attendance Summary -->
+  <section class="card p-4 mb-4"> 
+  <h2 class="section-title">Attendance Summary</h2>
+  <div class="row text-center">
+    <div class="col-md-3 mb-3">
+      <h3>{{ attendance_summary.present_days }}</h3>
+      <p>Days Present</p>
+    </div>
+    <div class="col-md-3 mb-3">
+      <h3>{{ attendance_summary.absent_days }}</h3>
+      <p>Days Absent</p>
+    </div>
+    <div class="col-md-3 mb-3">
+      <h3>{{ attendance_summary.total_days }}</h3>
+      <p>Total School Days</p>
+    </div>
+    <div class="col-md-3 mb-3">
+      <h3>{{ attendance_summary.attendance_rate }}%</h3>
+      <p>Attendance Rate</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Recent Results Table -->
+  <section class="card p-4 mb-4">
+    <h2 class="section-title">Recent Exam Results</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead>
+    <tr>
+      <th>Evaluation Type</th>
+      <th>Course</th>
+      <th>Date</th>
+      <th>Marks Obtained</th>
+      <th>Max Marks</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for result, evaluation in results %}
+    <tr>
+      <td>{{ evaluation.type.type_name }}</td>
+      <td>{{ evaluation.course.course_name }}</td>
+      <td>{{ evaluation.submission_date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ result.marks_obtained }}</td>
+      <td>{{ evaluation.max_marks }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5">No results found.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+  </section>
+
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-end gap-3">
+    <a href="{{ url_for('student.student_page') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to Students</a>
+  </div>
+</main>
+
+<!-- Footer and Bootstrap JS same as before -->
+
+
+  <!-- Footer -->
+  <footer class="text-center text-white py-3 bg-primary">
+    <p class="mb-0">© 2025 GoSchooler. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
