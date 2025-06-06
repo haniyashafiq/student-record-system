@@ -4,17 +4,7 @@ from .models import db, Student, Class, Course, Evaluation, Result, EvaluationTy
 
 results_bp = Blueprint('results', __name__, url_prefix='/results')
 
-def calculate_grade(marks):
-    if marks >= 90:
-        return 'A'
-    elif marks >= 80:
-        return 'B'
-    elif marks >= 70:
-        return 'C'
-    elif marks >= 60:
-        return 'D'
-    else:
-        return 'F'
+
 
 def update_final_result(student_id, course_id):
     results = (
@@ -26,26 +16,10 @@ def update_final_result(student_id, course_id):
     total_obtained = sum(r.marks_obtained for r in results)
     total_max = sum(r.evaluation.max_marks for r in results)
     percentage = (total_obtained / total_max) * 100 if total_max else 0
-    grade = calculate_grade(percentage)
+    
 
-    final_result = FinalResult.query.filter_by(student_ID=student_id, course_ID=course_id).first()
-    if final_result:
-        final_result.total_marks = total_obtained
-        final_result.max_marks = total_max
-        final_result.percentage = percentage
-        final_result.grade = grade
-    else:
-        new_final = FinalResult(
-            student_ID=student_id,
-            course_ID=course_id,
-            total_marks=total_obtained,
-            max_marks=total_max,
-            percentage=percentage,
-            grade=grade
-        )
-        db.session.add(new_final)
-
-    db.session.commit()
+    
+    
 
 
 @results_bp.route('/add', methods=['POST'])
@@ -61,13 +35,12 @@ def add_result():
         elif marks_obtained > evaluation.max_marks:
             return _render_results_template(f"Marks cannot exceed max marks {evaluation.max_marks}.", "danger")
 
-        grade = calculate_grade(marks_obtained)
+        
 
         new_result = Result(
             student_id=student_id,
             evaluation_id=evaluation_id,
-            marks_obtained=marks_obtained,
-            grade=grade
+            marks_obtained=marks_obtained
         )
         db.session.add(new_result)
         db.session.commit()
@@ -83,7 +56,7 @@ def edit_result(result_id):
     result = Result.query.get(result_id)
     if result:
         result.marks_obtained = float(request.form['marks_obtained'])
-        result.grade = calculate_grade(result.marks_obtained)
+        
         db.session.commit()
         update_final_result(result.student_ID, evaluation.course_ID)
     return redirect(url_for('results.view_results'))
@@ -112,8 +85,7 @@ def _render_results_template(message=None, message_type=None):
             Course.course_name.label('course_name'),
             Result.marks_obtained,
             Evaluation.max_marks.label('total_marks'),
-            Result.grade,
-            AcademicYear.academic_name.label('academic_year')  # <-- Add this line
+            AcademicYear.academic_name.label('academic_year')  
     
         )
         .join(Student, Result.student_ID == Student.student_ID)
